@@ -1,4 +1,4 @@
-package at.refugeescode.cup;
+package at.refugeescode.cup.endpoint;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -11,18 +11,25 @@ public class CupEndpoint {
 
     private RestTemplate restTemplate;
 
-    @Value("${receiver.url}")
-    private String receiverUrl;
+    @Value("${trickster.url}")
+    private String tricksterUrl;
+
+    @Value("${server.port}}")
+    private String serverPort;
 
     public CupEndpoint(RestTemplate restTemplate){
         this.restTemplate = restTemplate;
     }
 
     @GetMapping
-    Boolean get(){
-        String url = receiverUrl + "/play";
-        ResponseEntity <Boolean> forEntity = restTemplate.getForEntity(url, Boolean.TYPE);
-        return forEntity.getBody();
+    String get(){
+        String url = tricksterUrl + "/play";
+        //ResponseEntity <Boolean> forEntity = restTemplate.getForEntity(url, Boolean.TYPE);
+
+        /*if(forEntity.hasBody())
+            return "I have the coin. ";
+        else*/
+            return "I don't have the coin.";
     }
 
     @PutMapping
