@@ -10,12 +10,6 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/coin")
 public class CupEndpoint {
 
-    @Value("${trickster.url}")
-    private String tricksterUrl;
-
-    @Value("${server.port}}")
-    private String serverPort;
-
     @GetMapping
     Coin disappear() {
         Coin coin = new Coin();

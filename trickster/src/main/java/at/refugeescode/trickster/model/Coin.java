@@ -1,6 +1,8 @@
 package at.refugeescode.trickster.model;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Coin {
     private  Boolean visibility ;
 

@@ -1,7 +1,9 @@
 package at.refugeescode.cup.model;
 
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Coin {
 
     private  Boolean visibility;
