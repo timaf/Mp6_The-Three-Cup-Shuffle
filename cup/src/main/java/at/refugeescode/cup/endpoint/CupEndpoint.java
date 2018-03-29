@@ -1,5 +1,6 @@
 package at.refugeescode.cup.endpoint;
 
+import at.refugeescode.cup.model.Coin;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,39 +10,30 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/coin")
 public class CupEndpoint {
 
-    private RestTemplate restTemplate;
-
     @Value("${trickster.url}")
     private String tricksterUrl;
 
     @Value("${server.port}}")
     private String serverPort;
 
-    public CupEndpoint(RestTemplate restTemplate){
-        this.restTemplate = restTemplate;
-    }
-
     @GetMapping
-    String get(){
-        String url = tricksterUrl + "/play";
-        //ResponseEntity <Boolean> forEntity = restTemplate.getForEntity(url, Boolean.TYPE);
-
-        /*if(forEntity.hasBody())
-            return "I have the coin. ";
-        else*/
-            return "I don't have the coin.";
+    Coin disappear() {
+        Coin coin = new Coin();
+        coin.setVisibility(false);
+        System.out.println("I don't have the coin");
+        return coin;
     }
 
     @PutMapping
-    Boolean put(){
-        return true;
+    Coin appear(@RequestBody Coin coin){
+       return coin;
     }
 
     @DeleteMapping
-    Boolean delete(){
-        return false;
+    Coin remove(Coin coin){
+       coin.setVisibility(false);
+       return coin;
     }
-
 
 
 }
