@@ -36,7 +36,8 @@ public class TricksterEndpoint {
 
     @GetMapping("/choose/{chosenNumber}")
     String sayResult(@PathVariable int chosenNumber ) {
-        Coin coin = new Coin(true);
+        Coin coin = new Coin();
+        coin .setVisibility(true);
         Collections.shuffle(cupNumbers);
         int hiddenCoinCup = cupNumbers.get(0);
         restTemplate.put(cupUrl + port + hiddenCoinCup + "/coin",coin);
