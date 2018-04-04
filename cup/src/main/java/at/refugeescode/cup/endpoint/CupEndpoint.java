@@ -13,8 +13,8 @@ public class CupEndpoint {
 
 
     @PutMapping
-    Coin appear(@RequestBody Coin coin){
-       return coin;
+    String appear(@RequestBody Coin coin){
+       return "I have the coin";
     }
 
     @DeleteMapping
