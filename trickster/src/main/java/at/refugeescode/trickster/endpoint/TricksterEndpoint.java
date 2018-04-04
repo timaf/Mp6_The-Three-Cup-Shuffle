@@ -38,8 +38,8 @@ public class TricksterEndpoint {
     String sayResult(@PathVariable int chosenNumber ) {
         Coin coin = new Coin(true);
         Collections.shuffle(cupNumbers);
-        int hiddenCoinCup = cupNumbers.get(0);//cupUrl + port + hiddenCoinCup + "/coin"
-        restTemplate.put("http://localhost:9001/coin",coin);
+        int hiddenCoinCup = cupNumbers.get(0);
+        restTemplate.put(cupUrl + port + hiddenCoinCup + "/coin",coin);
         if(hiddenCoinCup == chosenNumber)
             return "you win ";
         else
