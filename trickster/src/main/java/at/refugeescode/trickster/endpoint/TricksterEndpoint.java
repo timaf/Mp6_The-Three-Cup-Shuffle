@@ -28,30 +28,23 @@ public class TricksterEndpoint {
 
     @GetMapping("/play")
     String startGame(){
-        Coin coin = new Coin(true);
-        Collections.shuffle(cupNumbers);
-        int hiddenCoinCup = cupNumbers.get(0);
-        restTemplate.put(cupUrl + port + hiddenCoinCup +" /coin",coin);
-        return "your turn you choose...";
+         restTemplate.delete(cupUrl + port + cupNumbers.get(0) + "/coin", Coin.class);
+         restTemplate.delete(cupUrl + port + cupNumbers.get(1) + "/coin", Coin.class);
+         restTemplate.delete(cupUrl + port + cupNumbers.get(2) + "/coin", Coin.class);
+         return " I hided the coin ,your turn you choose...";
     }
 
     @GetMapping("/choose/{chosenNumber}")
-    @ResponseBody
     String sayResult(@PathVariable int chosenNumber ) {
-        Coin coin1 = restTemplate.getForObject(cupUrl + port + cupNumbers.get(0) + " /coin", Coin.class);
-        Coin coin2 = restTemplate.getForObject(cupUrl + port + cupNumbers.get(1) + " /coin", Coin.class);
-        Coin coin3 = restTemplate.getForObject(cupUrl + port + cupNumbers.get(2) + " /coin", Coin.class);
-        ArrayList <Coin> coins = new ArrayList <>(Arrays.asList(coin1, coin2, coin3));
-        Optional <Coin> hiddenCoin = coins.stream()
-                .filter(coin -> coin.getVisibility().equals(true))
-                .findFirst();
-        if(hiddenCoin.isPresent())
-           if(hiddenCoin.toString().contains("chosenNumber"))
-               return "you win ";
-            else
-                return "you lose";
+        Coin coin = new Coin(true);
+        Collections.shuffle(cupNumbers);
+        int hiddenCoinCup = cupNumbers.get(0);//cupUrl + port + hiddenCoinCup + "/coin"
+        restTemplate.put("http://localhost:9001/coin",coin);
+        if(hiddenCoinCup == chosenNumber)
+            return "you win ";
         else
-           return "lost coin";
+            return "you lose";
+
     }
 
 }

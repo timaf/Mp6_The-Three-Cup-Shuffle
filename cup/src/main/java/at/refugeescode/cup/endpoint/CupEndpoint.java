@@ -1,6 +1,7 @@
 package at.refugeescode.cup.endpoint;
 
 import at.refugeescode.cup.model.Coin;
+import org.apache.catalina.authenticator.SpnegoAuthenticator;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,13 +11,6 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/coin")
 public class CupEndpoint {
 
-    @GetMapping
-    Coin disappear() {
-        Coin coin = new Coin();
-        coin.setVisibility(false);
-        System.out.println("I don't have the coin");
-        return coin;
-    }
 
     @PutMapping
     Coin appear(@RequestBody Coin coin){
